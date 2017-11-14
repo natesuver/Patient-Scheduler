@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.suver.nate.patientscheduler.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/logoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo"
+            android:layout_alignParentTop = "true"
+             />
+        <TextView
+            android:id="@+id/userLabelView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username_label"
+            android:layout_centerHorizontal = "false"
+            android:layout_below = "@+id/logoView"
+            >
+        </TextView>
+        <EditText
+            android:id="@+id/usernameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="nsuver"
+            android:layout_below = "@+id/userLabelView"
+         />
+        <TextView
+            android:id="@+id/pwLabelView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pw_label"
+            android:layout_centerHorizontal = "false"
+            android:layout_below = "@+id/usernameText">
+        </TextView>
+        <EditText
+            android:id="@+id/pwText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:text="B00mB00m.2"
+            android:layout_below = "@+id/pwLabelView" />
+        <TextView
+            android:id="@+id/tenantLabelView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tenant_label"
+            android:layout_centerHorizontal = "false"
+
+            android:layout_below = "@+id/pwText">
+        </TextView>
+        <EditText
+            android:id="@+id/tenantText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="SonetoQA"
+            android:layout_below = "@+id/tenantLabelView" />
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_label"
+            android:layout_below = "@+id/tenantText"
+            android:layout_centerHorizontal = "true"/>
+
+
+
+    </RelativeLayout>
+
+
+
+
+</android.support.constraint.ConstraintLayout>
