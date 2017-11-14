@@ -1,9 +1,7 @@
 package com.suver.nate.patientscheduler.BusinessLayer.Api;
 
 import android.content.Context;
-
 import com.suver.nate.patientscheduler.R;
-
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -13,6 +11,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 /**
@@ -64,8 +64,21 @@ public class Identity {
         }
         catch (Exception ex) {
             Log.e(LOG,ex.getMessage());
-            return null;
+            return getJsonError(mContext.getString(R.string.connection_error));
         }
+    }
+
+    @Nullable
+    private JSONObject getJsonError(String errorMessage) {
+        String err = "{\'error_description\':\'" + errorMessage + "\'}";
+        JSONObject obj=null;
+        try {
+            obj = new JSONObject(err);
+        }
+        catch (Exception ex1) {
+            Log.e(LOG,ex1.getMessage());
+        }
+        return obj;
     }
 
     public String BuildAccessTokenUrlParameters(String username, String pw, String tenant) {

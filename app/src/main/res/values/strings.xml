@@ -23,4 +23,5 @@
     <string name="invalid_username">Username is either empty or not valid</string>
     <string name="invalid_password">Password cannot be empty</string>
     <string name="invalid_tenant">Agency cannot be empty</string>
+    <string name="connection_error">Could not establish an internet connection.  Try again.</string>
 </resources>
