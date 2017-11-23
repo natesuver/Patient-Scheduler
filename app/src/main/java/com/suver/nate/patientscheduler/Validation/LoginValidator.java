@@ -1,4 +1,4 @@
-package com.suver.nate.patientscheduler.BusinessLayer.Validation;
+package com.suver.nate.patientscheduler.Validation;
 
 /**
  * Created by nates on 11/13/2017.
