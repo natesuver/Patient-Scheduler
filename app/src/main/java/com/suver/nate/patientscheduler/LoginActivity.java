@@ -94,12 +94,14 @@ public class LoginActivity extends AppCompatActivity {
                         mPassword.requestFocus();
                         mPassword.setError(error);
                     }
+                    mProgress.setVisibility(View.INVISIBLE);
                 }
                 else {
                     ApplicationData.authToken = result.getString("access_token");
                     new GetUserSetting(LoginActivity.this).execute();
                 }
             } catch(Exception ex) {
+                mProgress.setVisibility(View.INVISIBLE);
                 Log.d(LOG,ex.getMessage());
             }
 
@@ -110,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private class GetUserSetting extends AsyncTask<String, Void, UserSetting> {
         private Context mContext;
-        private JSONObject mToken;
         GetUserSetting(Context context){
             mContext = context;
         }
@@ -129,7 +130,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private class GetOfficeSettings extends AsyncTask<Integer, Void, OfficeSettings> {
         private Context mContext;
-        private JSONObject mToken;
         GetOfficeSettings(Context context){
             mContext = context;
         }

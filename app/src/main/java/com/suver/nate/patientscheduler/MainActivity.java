@@ -26,13 +26,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.suver.nate.patientscheduler.Api.UserSettingsApi;
+import com.suver.nate.patientscheduler.Interfaces.OnFragmentInteractionListener;
 import com.suver.nate.patientscheduler.Models.UserSetting;
 
 import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity implements OfficeFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     private static final String TokenDataKey = "TokenData";
     private String mTokenData;
     /**
@@ -150,10 +151,14 @@ public class MainActivity extends AppCompatActivity implements OfficeFragment.On
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            if (position==0) return OfficeFragment.newInstance();
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return OfficeFragment.newInstance();
+                case 1:
+                    return SchedulesFragment.newInstance();
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
+            }
         }
 
         @Override

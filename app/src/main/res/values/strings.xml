@@ -32,4 +32,7 @@
     <string name="office_welcome">Welcome To </string>
     <string name="care_message">Your Care is our primary concern</string>
     <string name="questions_concerns">If you have any questions about your care, or have an issue with a scheduled appointment, please click the icon in the lower right hand corner to call our office.\n\n<i>Swipe to the right to view your upcoming appointments</i>"</string>
+    <string name="my_schedules">My Appointments</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_scheduled">Scheduled</string>
 </resources>
