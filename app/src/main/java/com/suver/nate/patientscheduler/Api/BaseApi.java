@@ -1,13 +1,11 @@
 package com.suver.nate.patientscheduler.Api;
 
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.suver.nate.patientscheduler.ApplicationData;
 import com.suver.nate.patientscheduler.Models.Token;
 import com.suver.nate.patientscheduler.R;
 
@@ -170,19 +168,18 @@ public abstract class BaseApi {
             URL url = new URL(mBaseUrl + mTenant + "/" + partialUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty(AuthorizationMoniker, mToken.getTokenType() + " " + mToken.getAccessToken());
-            //urlConnection.setRequestMethod("GET");
-            //urlConnection.setDoOutput(true);
             connection.connect();
-            if (file.exists()) file.delete();
             InputStream inputStream = connection.getInputStream();
-            FileOutputStream fileOutputStream = new FileOutputStream(file.getPath());
+            FileOutputStream fileOutputStream = new FileOutputStream(file,false);
             int totalSize = connection.getContentLength();
             byte[] buffer = new byte[MEG];
             int bufferLength = 0;
             while ((bufferLength = inputStream.read(buffer)) > 0) {
                 fileOutputStream.write(buffer, 0, bufferLength);
             }
+            fileOutputStream.flush();
             fileOutputStream.close();
+            inputStream.close();
 
         } catch (Exception ex) {
             Log.e(LOG, ex.getMessage());

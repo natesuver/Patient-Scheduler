@@ -5,13 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.suver.nate.patientscheduler.Activities.LoginActivity">
-
     <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="15dp"
-        >
+        android:layout_centerInParent="true"
+        tools:context="com.suver.nate.patientscheduler.Activities.LoginActivity"
+        android:padding="10dp">
+        <ImageView
+            android:id="@+id/logoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/logo"
+            android:layout_alignParentTop = "true"
+            />
         <ProgressBar
             android:id="@+id/progress_loader"
             style="?android:attr/progressBarStyle"
@@ -19,73 +27,81 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="invisible" />
-        <ImageView
-            android:id="@+id/logoView"
+        <TableLayout
+            android:id="@+id/login_table"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/logo"
-            android:layout_alignParentTop = "true"
-             />
-        <TextView
-            android:id="@+id/userLabelView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/username_label"
-            android:layout_centerHorizontal = "false"
-            android:layout_below = "@+id/logoView"
+            android:layout_below="@id/logoView"
+            android:padding="15dp"
+            android:layout_centerInParent="true"
             >
-        </TextView>
-        <EditText
-            android:id="@+id/usernameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="mchristmas"
-            android:layout_below = "@+id/userLabelView"
-         />
-        <TextView
-            android:id="@+id/pwLabelView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pw_label"
-            android:layout_centerHorizontal = "false"
-            android:layout_below = "@+id/usernameText">
-        </TextView>
-        <EditText
-            android:id="@+id/pwText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:text="Android1!"
-            android:layout_below = "@+id/pwLabelView" />
-        <TextView
-            android:id="@+id/tenantLabelView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tenant_label"
-            android:layout_centerHorizontal = "false"
+            <TableRow>
+                <TextView
+                    android:id="@+id/userLabelView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/username_label"
+                    android:layout_centerHorizontal = "false"
+                    >
+                </TextView>
+                <EditText
+                    android:id="@+id/usernameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="mchristmas"
+                    android:layout_marginLeft="10dp"
+                    />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/pwLabelView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pw_label"
+                    android:layout_centerHorizontal = "false">
+                </TextView>
+                <EditText
+                    android:id="@+id/pwText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:text="Android1!"
+                    android:layout_marginLeft="10dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/tenantLabelView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tenant_label"
+                    >
+                </TextView>
+                <EditText
+                    android:id="@+id/tenantText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="SonetoQA"
+                    android:layout_marginLeft="10dp" />
+            </TableRow>
 
-            android:layout_below = "@+id/pwText">
-        </TextView>
-        <EditText
-            android:id="@+id/tenantText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="SonetoQA"
-            android:layout_below = "@+id/tenantLabelView" />
+        </TableLayout>
         <Button
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_label"
-            android:layout_below = "@+id/tenantText"
-            android:layout_centerHorizontal = "true"/>
+            android:layout_below = "@+id/login_table"
+            android:layout_centerHorizontal = "true"
 
+            />
     </RelativeLayout>
+
+
 
 
 

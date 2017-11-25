@@ -1,52 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stretchColumns="0,1"
     android:padding="10dp"
     android:layout_margin="10dp"
     android:background="@color/scheduleRow">
-    <TableRow>
-        <TextView
-            android:id="@+id/schedule_date"
+    <LinearLayout
+        android:id="@+id/chkLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <CheckBox
+            android:id="@+id/performed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:height="30dp"
-            android:text="Date"
+            android:text=""
+            android:enabled="false"
+            />
+        <TextView
+            android:id="@+id/taskName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Task Name"
             android:textColor="@color/scheduleText"
             android:textSize="20sp" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/planNotesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginLeft="40dp"
+        android:text="@string/plan_notes_label"
+        android:textColor="@color/scheduleText"
+        android:layout_below="@id/chkLayout"
+        />
+    <TextView
+        android:id="@+id/planNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_marginLeft="50dp"
+        android:text="PlanNotes"
+        android:textColor="@color/scheduleText"
+        android:layout_below="@id/planNotesLabel"
+        />
+    <TextView
+        android:id="@+id/visitNotesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginLeft="40dp"
+        android:text="@string/visit_notes_label"
+        android:textColor="@color/scheduleText"
+        android:layout_below="@id/planNotes"
+        />
+    <TextView
+        android:id="@+id/visitNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginLeft="50dp"
+        android:textColor="@color/scheduleText"
+        android:layout_below="@id/visitNotesLabel"
+        />
 
-        <TextView
-            android:id="@+id/schedule_caregiver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:height="30dp"
-            android:textSize="20sp"
-            android:text="Caregiver"
-            android:textAlignment="textEnd"
-            android:textColor="@color/scheduleText"
-            />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:id="@+id/schedule_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textAlignment="textStart"
-            android:text="Service"
-            android:textColor="@color/scheduleText"
-            />
-        <TextView
-            android:id="@+id/schedule_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textAlignment="textEnd"
-            android:text="Status"
-            android:textColor="@color/scheduleText"
-            android:layout_below="@id/schedule_date"
-            />
-    </TableRow>
-</TableLayout>
+</RelativeLayout>

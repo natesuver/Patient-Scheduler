@@ -1,17 +1,22 @@
 package com.suver.nate.patientscheduler.Fragments;
 
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +34,14 @@ import java.text.NumberFormat;
 
 
 public class InvoiceFragment extends Fragment {
+    private static final String LOG = "InvoiceFragment";
     private static final String list_key = "InvoiceListData";
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
     private OnFragmentInteractionListener mListener;
     private RecyclerView mInvoiceList;
     private InvoiceListItem[] mLastResult;
@@ -126,10 +138,22 @@ public class InvoiceFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
+            verifyStoragePermissions(getActivity());
             new DownloadInvoice(getActivity()).execute(mInvoiceData.getId());
         }
     }
 
+    //todo: move this to a place that is not as disruptive.  if they've already clicked, and they get this popup, it's already too late to ask for permissions.
+    private void verifyStoragePermissions(Activity activity) {
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
     private class InvoiceAdapter extends RecyclerView.Adapter<InvoiceFragment.InvoiceHolder> {
         private InvoiceListItem[] mInvoices;
         public InvoiceAdapter(InvoiceListItem[] Invoices) {
@@ -185,6 +209,8 @@ public class InvoiceFragment extends Fragment {
         @Override
         protected void onPostExecute(File file) {
             Uri path = Uri.fromFile(file);
+            Log.d(LOG,"Uri: " + path.getPath());
+            Log.d(LOG,"Storage Writeable?: " + isExternalStorageWritable());
             Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
             pdfIntent.addFlags(
                     Intent.FLAG_GRANT_READ_URI_PERMISSION);

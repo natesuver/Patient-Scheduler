@@ -20,7 +20,7 @@
     <string name="username_label">Username:</string>
     <string name="pw_label">Password:</string>
     <string name="login_label">Sign In</string>
-    <string name="tenant_label">Agency</string>
+    <string name="tenant_label">Agency:</string>
     <string name="invalid_username">Username is either empty or not valid</string>
     <string name="invalid_password">Password cannot be empty</string>
     <string name="invalid_tenant">Agency cannot be empty</string>

@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="0"
+    android:padding="10dp"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    android:background="@color/scheduleRow">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/taskName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:height="30dp"
+        android:text="Task Name"
+        android:textColor="@color/scheduleText"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/planNotesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/plan_notes_label"
+        android:textColor="@color/scheduleText"
+        android:layout_below="@id/chkLayout"
+        />
+    <TextView
+        android:id="@+id/planNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:text="PlanNotes"
+        android:textColor="@color/scheduleText"
+        android:layout_below="@id/planNotesLabel"
+        />
+
+</LinearLayout>

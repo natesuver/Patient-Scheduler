@@ -1,6 +1,7 @@
 package com.suver.nate.patientscheduler.Activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -34,6 +35,10 @@ import com.suver.nate.patientscheduler.R;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     private static final String TokenDataKey = "TokenData";
+    private static final int REQUEST_PHONE = 1;
+    private static String[] PERMISSIONS_PHONE = {
+            Manifest.permission.CALL_PHONE
+    };
     private String mTokenData;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        verifyCallPermissions(MainActivity.this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +143,17 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         }
     }
 
+    private void verifyCallPermissions(Activity activity) {
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_PHONE,
+                    REQUEST_PHONE
+            );
+        }
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -194,5 +210,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             startActivity(callIntent);
         }
     }
+
 
 }
