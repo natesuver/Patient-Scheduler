@@ -1,7 +1,6 @@
-package com.suver.nate.patientscheduler;
+package com.suver.nate.patientscheduler.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.suver.nate.patientscheduler.ApplicationData;
 import com.suver.nate.patientscheduler.Interfaces.OnFragmentInteractionListener;
+import com.suver.nate.patientscheduler.R;
 
 public class OfficeFragment extends Fragment {
     private OnFragmentInteractionListener mListener;

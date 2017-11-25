@@ -1,5 +1,5 @@
-package com.suver.nate.patientscheduler;
-import com.suver.nate.patientscheduler.Models.Schedule;
+package com.suver.nate.patientscheduler.Helpers;
+import com.suver.nate.patientscheduler.Models.ScheduleListItem;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 import org.joda.time.format.DateTimeFormat;
@@ -10,8 +10,8 @@ import java.util.Comparator;
  * Created by nates on 11/24/2017.
  */
 
-public class ScheduleSort implements Comparator<Schedule> {
-    public int compare(Schedule a, Schedule b)
+public class ScheduleSort implements Comparator<ScheduleListItem> {
+    public int compare(ScheduleListItem a, ScheduleListItem b)
     {
         DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/dd/yyyy");
         DateTime date1 = fmt.parseDateTime(a.getStartDate()); //todo:  sort by time as well.

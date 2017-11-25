@@ -1,12 +1,15 @@
 package com.suver.nate.patientscheduler.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * Created by nates on 11/22/2017.
  */
 
-public class Schedule {
+public class ScheduleListItem implements Parcelable {
 
     private String startDate;
     private String startTime;
@@ -84,4 +87,49 @@ public class Schedule {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    protected ScheduleListItem(Parcel in) {
+        startDate = in.readString();
+        startTime = in.readString();
+        endDate = in.readString();
+        endTime = in.readString();
+        status = (Status) in.readValue(Status.class.getClassLoader());
+        caregiverName = in.readString();
+        service = (Service) in.readValue(Service.class.getClassLoader());
+        id = in.readByte() == 0x00 ? null : in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(startDate);
+        dest.writeString(startTime);
+        dest.writeString(endDate);
+        dest.writeString(endTime);
+        dest.writeValue(status);
+        dest.writeString(caregiverName);
+        dest.writeValue(service);
+        if (id == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(id);
+        }
+    }
+
+    public static final Parcelable.Creator<ScheduleListItem> CREATOR = new Parcelable.Creator<ScheduleListItem>() {
+        @Override
+        public ScheduleListItem createFromParcel(Parcel in) {
+            return new ScheduleListItem(in);
+        }
+
+        @Override
+        public ScheduleListItem[] newArray(int size) {
+            return new ScheduleListItem[size];
+        }
+    };
 }

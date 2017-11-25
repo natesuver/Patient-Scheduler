@@ -1,8 +1,7 @@
-package com.suver.nate.patientscheduler;
+package com.suver.nate.patientscheduler.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,14 +10,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.suver.nate.patientscheduler.Api.OfficeSettingsApi;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.suver.nate.patientscheduler.Activities.ScheduleDetailActivity;
 import com.suver.nate.patientscheduler.Api.ScheduleApi;
+import com.suver.nate.patientscheduler.ApplicationData;
 import com.suver.nate.patientscheduler.Interfaces.OnFragmentInteractionListener;
-import com.suver.nate.patientscheduler.Models.OfficeSettings;
-import com.suver.nate.patientscheduler.Models.Schedule;
+import com.suver.nate.patientscheduler.Models.ScheduleListItem;
+import com.suver.nate.patientscheduler.R;
+import com.suver.nate.patientscheduler.Helpers.ScheduleSort;
 
 import org.json.JSONObject;
 
@@ -27,9 +30,11 @@ import java.util.Arrays;
 
 public class SchedulesFragment extends Fragment {
     private static final String list_key = "ScheduleListData";
+    private static final Integer RequestCode = 0;
     private OnFragmentInteractionListener mListener;
     private RecyclerView mScheduleList;
-    private Schedule[] mLastResult;
+    ProgressBar mProgress;
+    private ScheduleListItem[] mLastResult;
     private ScheduleAdapter mAdapter;
     public SchedulesFragment() {
 
@@ -48,13 +53,16 @@ public class SchedulesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_schedules, container, false);
         mScheduleList = v.findViewById(R.id.scheduleList);
+        mProgress = v.findViewById(R.id.progress_loader);
         mScheduleList.setLayoutManager(new LinearLayoutManager(getActivity()));
         //updateUI();
+        mProgress.setVisibility(View.VISIBLE);
         new ScheduleList(getActivity().getBaseContext()).execute(ApplicationData.userSetting.getMapToEntityID());
         return v;
     }
 
     private void updateUI() {
+        mProgress.setVisibility(View.INVISIBLE);
         if (mLastResult!=null) {
             mAdapter = new ScheduleAdapter(mLastResult);
             mScheduleList.setAdapter(mAdapter);
@@ -68,7 +76,7 @@ public class SchedulesFragment extends Fragment {
     }
 
     private void retrieveData(Bundle savedInstanceState) {
-        mLastResult = (Schedule[]) savedInstanceState.getSerializable(list_key);
+        mLastResult = (ScheduleListItem[]) savedInstanceState.getSerializable(list_key);
     }
 
     public static SchedulesFragment newInstance() {
@@ -105,7 +113,7 @@ public class SchedulesFragment extends Fragment {
         private TextView mCaregiver;
         private TextView mStatus;
 
-        private Schedule mScheduleData;
+        private ScheduleListItem mScheduleData;
         public ScheduleHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_schedule, parent, false  ));
             itemView.setOnClickListener(this);
@@ -114,7 +122,7 @@ public class SchedulesFragment extends Fragment {
             mCaregiver = itemView.findViewById(R.id.schedule_caregiver);
             mStatus = itemView.findViewById(R.id.schedule_status);
         }
-        public void bind(Schedule sched) {
+        public void bind(ScheduleListItem sched) {
             mScheduleData = sched;
             mService.setText(mScheduleData.getService().getName());
             mStatus.setText(mScheduleData.getStatus().getFullDescription());
@@ -124,13 +132,14 @@ public class SchedulesFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-          //  new Search(getActivity().getBaseContext()).execute(mCityData.getResourceUrl());
+            Intent intent = ScheduleDetailActivity.newIntent(getActivity(),mScheduleData); //gson.toJson(mScheduleData)
+            startActivity(intent);
         }
     }
 
     private class ScheduleAdapter extends RecyclerView.Adapter<ScheduleHolder> {
-        private Schedule[] mSchedules;
-        public ScheduleAdapter(Schedule[] schedules) {
+        private ScheduleListItem[] mSchedules;
+        public ScheduleAdapter(ScheduleListItem[] schedules) {
             mSchedules = schedules;
         }
 
@@ -142,7 +151,7 @@ public class SchedulesFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ScheduleHolder holder, int position) {
-            Schedule sched = mSchedules[position];
+            ScheduleListItem sched = mSchedules[position];
             holder.bind(sched);
         }
         @Override
@@ -151,19 +160,18 @@ public class SchedulesFragment extends Fragment {
         }
     }
 
-    private class ScheduleList extends AsyncTask<Integer, Void, Schedule[]> {
+    private class ScheduleList extends AsyncTask<Integer, Void, ScheduleListItem[]> {
         private Context mContext;
-        private JSONObject mToken;
         ScheduleList(Context context){
             mContext = context;
         }
         @Override
-        protected Schedule[] doInBackground(Integer... params){
+        protected ScheduleListItem[] doInBackground(Integer... params){
             ScheduleApi api = new ScheduleApi(mContext);
             return api.GetList(params[0]);
         }
         @Override
-        protected void onPostExecute(Schedule[] result) {
+        protected void onPostExecute(ScheduleListItem[] result) {
             //load schedules after search
             Arrays.sort(result, new ScheduleSort());
             mLastResult = result;

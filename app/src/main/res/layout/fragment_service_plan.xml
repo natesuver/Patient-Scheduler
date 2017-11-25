@@ -5,27 +5,20 @@
     android:padding="10dp"
     android:layout_margin="10dp"
     android:orientation="vertical"
-    tools:context="com.suver.nate.patientscheduler.Fragments.SchedulesFragment">
+    tools:context="com.suver.nate.patientscheduler.Fragments.ServicePlanFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:height="30dp"
-        android:text="@string/my_schedules"
+        android:text="@string/my_service_plan"
         android:textAlignment="center"
         android:textSize="20sp"
         android:layout_marginBottom="30dp"/>
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/scheduleList"
+        android:id="@+id/servicePlanList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-    <ProgressBar
-        android:id="@+id/progress_loader"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="invisible" />
 
 </LinearLayout>

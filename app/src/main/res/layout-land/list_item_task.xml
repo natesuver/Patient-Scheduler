@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="0,1"
+    android:padding="10dp"
+    android:layout_margin="10dp"
+    android:background="@color/scheduleRow">
+    <TableRow>
+        <TextView
+            android:id="@+id/schedule_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="30dp"
+            android:text="Date"
+            android:textColor="@color/scheduleText"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/schedule_caregiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="30dp"
+            android:textSize="20sp"
+            android:text="Caregiver"
+            android:textAlignment="textEnd"
+            android:textColor="@color/scheduleText"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/schedule_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textAlignment="textStart"
+            android:text="Service"
+            android:textColor="@color/scheduleText"
+            />
+        <TextView
+            android:id="@+id/schedule_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textAlignment="textEnd"
+            android:text="Status"
+            android:textColor="@color/scheduleText"
+            android:layout_below="@id/schedule_date"
+            />
+    </TableRow>
+</TableLayout>

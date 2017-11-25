@@ -1,6 +1,11 @@
 package com.suver.nate.patientscheduler.Api;
 
 import android.content.Context;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.suver.nate.patientscheduler.Models.ScheduleDetail;
+import com.suver.nate.patientscheduler.Models.Token;
 import com.suver.nate.patientscheduler.R;
 import org.json.JSONObject;
 
@@ -12,18 +17,21 @@ public class Identity extends BaseApi {
 
     private String mUrl;
     private static final String LOG = "Identity";
-   public Identity(Context context, String baseUrl, String tenant) {
-       super(context,baseUrl, tenant, context.getString(R.string.content_type_ids),"");
+   public Identity(Context context, String tenant) {
+       super(context,context.getString(R.string.api_token_url), tenant, context.getString(R.string.content_type_ids),null);
    }
-    public JSONObject GetAccessToken(String username, String pw) {
+    public Token GetAccessToken(String username, String pw) {
         String parms = BuildAccessTokenUrlParameters(username,pw);
-        JSONObject result = ExecuteRequest("",parms);
-        return result;
+        String result= ExecuteRequest("",parms, false);
+        Gson gson = new GsonBuilder().create();
+        return gson.fromJson(result, Token.class);
     }
 
-    public JSONObject GetRefreshToken(String refreshToken) {
-        String parms = BuildRefreshTokenUrlParameters(refreshToken);
-        return ExecuteRequest("",parms);
+    protected Token RefreshToken(Token existingToken) {
+        String parms = BuildRefreshTokenUrlParameters(existingToken.getRefreshToken());
+        String result= ExecuteRequest("",parms, false);
+        Gson gson = new GsonBuilder().create();
+        return gson.fromJson(result, Token.class);
     }
 
 
@@ -47,5 +55,4 @@ public class Identity extends BaseApi {
         result += BuildParm(R.string.refresh_token_ident,refreshToken,true);
         return result;
     }
-
 }

@@ -15,9 +15,11 @@ import org.json.JSONObject;
  * Created by nates on 11/22/2017.
  */
 
-public class OfficeSettingsApi extends BaseApi {
+public class OfficeSettingsApi extends RequestApi {
+
+
     public OfficeSettingsApi(Context context) {
-        super(context,context.getString(R.string.base_api_url), ApplicationData.tenant, context.getString(R.string.content_type_api), ApplicationData.authToken);
+        super(context);
     }
 
     public OfficeSettings Get(Integer officeId) {

@@ -1,11 +1,10 @@
-package com.suver.nate.patientscheduler;
+package com.suver.nate.patientscheduler.Activities;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -25,13 +24,13 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-import com.suver.nate.patientscheduler.Api.UserSettingsApi;
+import com.suver.nate.patientscheduler.ApplicationData;
+import com.suver.nate.patientscheduler.Fragments.InvoiceFragment;
+import com.suver.nate.patientscheduler.Fragments.OfficeFragment;
+import com.suver.nate.patientscheduler.Fragments.SchedulesFragment;
+import com.suver.nate.patientscheduler.Fragments.ServicePlanFragment;
 import com.suver.nate.patientscheduler.Interfaces.OnFragmentInteractionListener;
-import com.suver.nate.patientscheduler.Models.UserSetting;
-
-import org.json.JSONObject;
-
-import java.util.concurrent.ExecutionException;
+import com.suver.nate.patientscheduler.R;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     private static final String TokenDataKey = "TokenData";
@@ -156,8 +155,12 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                     return OfficeFragment.newInstance();
                 case 1:
                     return SchedulesFragment.newInstance();
+                case 2:
+                    return ServicePlanFragment.newInstance();
+                case 3:
+                    return InvoiceFragment.newInstance();
                 default:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    throw new UnsupportedOperationException("Not Supported") ;
             }
         }
 

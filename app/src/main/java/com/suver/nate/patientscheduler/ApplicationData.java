@@ -1,6 +1,8 @@
 package com.suver.nate.patientscheduler;
 
+import com.suver.nate.patientscheduler.Helpers.TaskDescriptionLookup;
 import com.suver.nate.patientscheduler.Models.OfficeSettings;
+import com.suver.nate.patientscheduler.Models.Token;
 import com.suver.nate.patientscheduler.Models.UserSetting;
 
 /**
@@ -21,6 +23,7 @@ public class ApplicationData {
     public static String tenant;
     public static UserSetting userSetting;
     public static OfficeSettings officeSettings;
-    public static String authToken;
+    public static Token token;
+    public static TaskDescriptionLookup tasks;
 
 }

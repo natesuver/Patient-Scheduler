@@ -14,9 +14,9 @@ import org.json.JSONObject;
  * Created by nates on 11/22/2017.
  */
 
-public class UserSettingsApi extends BaseApi {
+public class UserSettingsApi extends RequestApi {
     public UserSettingsApi(Context context) {
-        super(context,context.getString(R.string.base_api_url), ApplicationData.tenant, context.getString(R.string.content_type_api), ApplicationData.authToken);
+        super(context);
     }
     public UserSetting Get() {
         String result = ExecuteRequest("common/profile-settings/user");

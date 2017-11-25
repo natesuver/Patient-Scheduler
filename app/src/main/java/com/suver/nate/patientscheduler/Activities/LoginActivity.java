@@ -1,6 +1,5 @@
-package com.suver.nate.patientscheduler;
+package com.suver.nate.patientscheduler.Activities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -12,11 +11,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.suver.nate.patientscheduler.Api.DropdownListApi;
 import com.suver.nate.patientscheduler.Api.Identity;
 import com.suver.nate.patientscheduler.Api.OfficeSettingsApi;
+import com.suver.nate.patientscheduler.Api.ScheduleApi;
 import com.suver.nate.patientscheduler.Api.UserSettingsApi;
+import com.suver.nate.patientscheduler.ApplicationData;
+import com.suver.nate.patientscheduler.Helpers.TaskDescriptionLookup;
 import com.suver.nate.patientscheduler.Models.OfficeSettings;
+import com.suver.nate.patientscheduler.Models.Token;
 import com.suver.nate.patientscheduler.Models.UserSetting;
+import com.suver.nate.patientscheduler.R;
 import com.suver.nate.patientscheduler.Validation.LoginValidator;
 
 import org.json.JSONObject;
@@ -25,6 +30,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     private static final String LOG = "LoginScreen";
     private static final Integer RequestCode = 0;
+    private static final Integer TaskListIdentifierCode = 27;
     EditText mUsername;
     EditText mPassword;
     EditText mTenant;
@@ -59,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 ApplicationData.tenant = tenant;
                 mProgress.setVisibility(View.VISIBLE);
+                mLogin.setEnabled(false);
                 new GetToken(LoginActivity.this).execute(username,pw,tenant);
             }
         });
@@ -66,46 +73,38 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private class GetToken extends AsyncTask<String, Void, JSONObject> {
+    private class GetToken extends AsyncTask<String, Void, Token> {
 
         private Context mContext;
-        private JSONObject mToken;
         GetToken(Context context){
             mContext = context;
         }
         @Override
-        protected JSONObject doInBackground(String... params){
-            Identity id = new Identity(mContext, mContext.getString(R.string.api_token_url), params[2]);
-            mToken = id.GetAccessToken(params[0],params[1]);
-            return mToken;
+        protected Token doInBackground(String... params){
+            Identity id = new Identity(mContext, params[2]);
+            return id.GetAccessToken(params[0],params[1]);
         }
 
         @Override
-        protected void onPostExecute(JSONObject result) {
+        protected void onPostExecute(Token result) {
             mLogin.setError(null);
-            try {
-                if (result.has("error_description")) {
-                    String error = result.getString("error_description");
-                    if (error.contains("Tenant")) {
-                        mTenant.requestFocus();
-                        mTenant.setError(error);
-                    }
-                    else {
-                        mPassword.requestFocus();
-                        mPassword.setError(error);
-                    }
-                    mProgress.setVisibility(View.INVISIBLE);
+            ApplicationData.token = result;
+            if (result.getErrorDescription().length()>0) {
+                String error = result.getErrorDescription();
+                if (error.contains("Tenant")) {
+                    mTenant.requestFocus();
+                    mTenant.setError(error);
                 }
                 else {
-                    ApplicationData.authToken = result.getString("access_token");
-                    new GetUserSetting(LoginActivity.this).execute();
+                    mPassword.requestFocus();
+                    mPassword.setError(error);
                 }
-            } catch(Exception ex) {
                 mProgress.setVisibility(View.INVISIBLE);
-                Log.d(LOG,ex.getMessage());
+                mLogin.setEnabled(true);
             }
-
-
+            else {
+                new GetUserSetting(LoginActivity.this).execute();
+            }
             Log.d(LOG,result.toString());
         }
     }
@@ -125,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(UserSetting result) {
             ApplicationData.userSetting = result;
             new GetOfficeSettings(LoginActivity.this).execute(result.getBranchID());
+            new TaskList(LoginActivity.this).execute(result.getBranchID(),TaskListIdentifierCode );
         }
     }
 
@@ -148,6 +148,21 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private class TaskList extends AsyncTask<Integer, Void, TaskDescriptionLookup> {
+        private Context mContext;
+        TaskList(Context context){
+            mContext = context;
+        }
+        @Override
+        protected TaskDescriptionLookup doInBackground(Integer... params){
+            DropdownListApi api = new DropdownListApi(mContext);
+            return api.GetTaskList(params[0], params[1]);
+        }
+        @Override
+        protected void onPostExecute(TaskDescriptionLookup result) {
+            ApplicationData.tasks = result;
+        }
+    }
 
 }
 
