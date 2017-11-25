@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 /**
  * Created by nates on 11/23/2017.
+ * note: ran through http://www.parcelabler.com/ to implements Parcelable
  */
 public class Status implements Parcelable {
     private Integer id;

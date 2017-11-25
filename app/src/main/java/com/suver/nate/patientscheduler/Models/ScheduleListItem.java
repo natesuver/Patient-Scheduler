@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * Created by nates on 11/22/2017.
+ * note: ran through http://www.parcelabler.com/ to implements Parcelable
  */
 
 public class ScheduleListItem implements Parcelable {

@@ -44,7 +44,11 @@
     <string name="label_services"><b>Tasks Performed:</b></string>
     <string name="visit_notes_label"><i>Visit Notes:</i></string>
     <string name="plan_notes_label"><i>Supervisor Comments:</i></string>
+    <string name="invoice_number_label"><b>Invoice #:</b></string>
+    <string name="invoice_date_label"><b>Invoice Date:</b></string>
+    <string name="invoice_servicedates_label"><b>Dates of Service:</b></string>
+    <string name="invoice_amount_label"><b>Amount:</b></string>
+    <string name="invoice_balance_label"><b>Balance:</b></string>
+    <string name="invoice_payer_label"><b>Payer:</b></string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

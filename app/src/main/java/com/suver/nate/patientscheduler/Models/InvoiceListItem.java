@@ -1,10 +1,14 @@
 package com.suver.nate.patientscheduler.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by nates on 11/24/2017.
+ * note: ran through http://www.parcelabler.com/ to implements Parcelable
  */
 
-public class InvoiceListItem {
+public class InvoiceListItem implements Parcelable {
     private Integer id;
     private String invoiceNumber;
     private String invoiceDate;
@@ -77,4 +81,64 @@ public class InvoiceListItem {
     public void setPayerName(String payerName) {
         this.payerName = payerName;
     }
+
+    public String getServiceDates() {
+        return this.serviceFrom + " - " + this.serviceThrough;
+    }
+
+    protected InvoiceListItem(Parcel in) {
+        id = in.readByte() == 0x00 ? null : in.readInt();
+        invoiceNumber = in.readString();
+        invoiceDate = in.readString();
+        serviceFrom = in.readString();
+        serviceThrough = in.readString();
+        amount = in.readByte() == 0x00 ? null : in.readDouble();
+        balance = in.readByte() == 0x00 ? null : in.readDouble();
+        payerName = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(id);
+        }
+        dest.writeString(invoiceNumber);
+        dest.writeString(invoiceDate);
+        dest.writeString(serviceFrom);
+        dest.writeString(serviceThrough);
+        if (amount == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeDouble(amount);
+        }
+        if (balance == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeDouble(balance);
+        }
+        dest.writeString(payerName);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<InvoiceListItem> CREATOR = new Parcelable.Creator<InvoiceListItem>() {
+        @Override
+        public InvoiceListItem createFromParcel(Parcel in) {
+            return new InvoiceListItem(in);
+        }
+
+        @Override
+        public InvoiceListItem[] newArray(int size) {
+            return new InvoiceListItem[size];
+        }
+    };
 }

@@ -1,6 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</android.support.constraint.ConstraintLayout>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/invoiceRow"
+    android:padding="10dp"
+    android:layout_margin="10dp"
+    >
+    <TableRow>
+        <TextView
+            android:id="@+id/invoiceNumberLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:text="@string/invoice_number_label"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/invoiceNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            android:text="Invoice Number"
+            android:layout_marginLeft="20dp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/invoiceDateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:text="@string/invoice_date_label"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/invoiceDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            android:text="Invoice Date"
+            android:layout_marginLeft="20dp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/invoiceServiceDatesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:text="@string/invoice_servicedates_label"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/invoiceServiceDates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            android:text="Invoice Service Dates"
+            android:layout_marginLeft="20dp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/invoiceAmountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:text="@string/invoice_amount_label"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/invoiceAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            android:text="Invoice Amount"
+            android:layout_marginLeft="20dp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/invoiceBalanceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:text="@string/invoice_balance_label"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/invoiceBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            android:text="Invoice Balance"
+            android:layout_marginLeft="20dp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/invoicePayerLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:text="@string/invoice_payer_label"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/invoicePayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="15dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp"
+            android:text="Invoice Payer"
+            android:layout_marginLeft="20dp" />
+    </TableRow>
+</TableLayout>

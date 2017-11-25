@@ -11,10 +11,10 @@ import com.suver.nate.patientscheduler.ApplicationData;
 import com.suver.nate.patientscheduler.Models.Token;
 import com.suver.nate.patientscheduler.R;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,6 +31,7 @@ public abstract class BaseApi {
     private static final String LOG = "BaseApi";
     private static final String ContentTypeMoniker = "Content-Type";
     private static final String AuthorizationMoniker = "Authorization";
+    private static final int  MEG = 1024 * 1024;
     protected String mBaseUrl;
     protected Context mContext;
     protected String mTenant;
@@ -109,30 +110,6 @@ public abstract class BaseApi {
     }
 
     protected abstract Token RefreshToken(Token existingToken);
-/*
-
-    protected JSONObject getJsonError(String errorMessage) {
-        String err = "{\'error_description\':\'" + errorMessage + "\'}";
-        JSONObject obj=null;
-        try {
-            obj = new JSONObject(err);
-        }
-        catch (Exception ex1) {
-            Log.e(LOG,ex1.getMessage());
-        }
-        return obj;
-    }
-
-    protected JSONObject GetJsonObjectFromStream(InputStream stream) {
-        try {
-            StringBuffer response = GetResponseStringBuffer(stream);
-            return new JSONObject(response.toString());
-        } catch (Exception e) {
-            Log.e(LOG,e.getMessage());
-            return null;
-        }
-    }
-*/
     @NonNull
     protected StringBuffer GetResponseStringBuffer(InputStream stream) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(stream));
@@ -187,4 +164,30 @@ public abstract class BaseApi {
         }
 
     }
+
+    protected void ExecuteFileRequest(String partialUrl, File file) {
+        try {
+            URL url = new URL(mBaseUrl + mTenant + "/" + partialUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty(AuthorizationMoniker, mToken.getTokenType() + " " + mToken.getAccessToken());
+            //urlConnection.setRequestMethod("GET");
+            //urlConnection.setDoOutput(true);
+            connection.connect();
+            if (file.exists()) file.delete();
+            InputStream inputStream = connection.getInputStream();
+            FileOutputStream fileOutputStream = new FileOutputStream(file.getPath());
+            int totalSize = connection.getContentLength();
+            byte[] buffer = new byte[MEG];
+            int bufferLength = 0;
+            while ((bufferLength = inputStream.read(buffer)) > 0) {
+                fileOutputStream.write(buffer, 0, bufferLength);
+            }
+            fileOutputStream.close();
+
+        } catch (Exception ex) {
+            Log.e(LOG, ex.getMessage());
+        }
+    }
+
+
 }
