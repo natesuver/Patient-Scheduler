@@ -83,7 +83,7 @@ public class InvoiceListItem implements Parcelable {
     }
 
     public String getServiceDates() {
-        return this.serviceFrom + " - " + this.serviceThrough;
+        return this.serviceFrom + " to " + this.serviceThrough;
     }
 
     protected InvoiceListItem(Parcel in) {
