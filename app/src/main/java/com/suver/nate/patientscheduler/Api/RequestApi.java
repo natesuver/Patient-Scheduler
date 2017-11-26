@@ -15,11 +15,11 @@ public abstract class RequestApi extends BaseApi {
         super(context,context.getString(R.string.base_api_url), ApplicationData.tenant, context.getString(R.string.content_type_api), ApplicationData.token);
     }
 
-    protected Token RefreshToken(Token existingToken) {
+    protected void RefreshToken(Token existingToken) {
         Identity i = new Identity(mContext,"");
-        Token refresh = i.RefreshToken(existingToken);
+        Token refresh = i.GetRefreshToken(existingToken);
         refresh.incrementRetries();
-        ApplicationData.token =refresh;
-        return refresh;
+        existingToken.setAccessToken(refresh.getAccessToken());
+        existingToken.setRefreshToken(refresh.getRefreshToken());
     }
 }

@@ -50,4 +50,8 @@ public class Token {
     public void incrementRetries() {
         this.retries++;
     }
+
+    public void resetRetries() {
+        this.retries=0;
+    }
 }

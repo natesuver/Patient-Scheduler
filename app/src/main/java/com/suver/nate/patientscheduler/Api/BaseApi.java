@@ -88,13 +88,14 @@ public abstract class BaseApi {
             switch (responseCode) {
                 case 200: //200 is success,
                     stream = connection.getInputStream();
+                    mToken.resetRetries();
                     break;
                 case 401: //Unauthorized.  Assume the access token is bad, and needs to be refreshed
-                    mToken = RefreshToken(mToken); //this is untested.
+                    RefreshToken(mToken);
                     if (mToken.getRetries() <4)
                         return ExecuteRequest(partialUrl);
                     else
-                        stream = connection.getErrorStream();
+                        stream = connection.getErrorStream(); //TODO: multiple attempts at authentication fail to work here.  Inform the user and shut down the application?
                     break;
                 default: // everything else, for this purpose, is not a success.
                     stream = connection.getErrorStream();
@@ -107,7 +108,7 @@ public abstract class BaseApi {
         }
     }
 
-    protected abstract Token RefreshToken(Token existingToken);
+    protected abstract void RefreshToken(Token existingToken);
     @NonNull
     protected StringBuffer GetResponseStringBuffer(InputStream stream) throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(stream));

@@ -27,15 +27,17 @@ public class Identity extends BaseApi {
         return gson.fromJson(result, Token.class);
     }
 
-    protected Token RefreshToken(Token existingToken) {
-        String parms = BuildRefreshTokenUrlParameters(existingToken.getRefreshToken());
+    protected Token GetRefreshToken(Token existingToken) {
+        String parms = BuildRefreshTokenUrlParameters(existingToken.getRefreshToken()); //returns invalid_grant, investigate.
         String result= ExecuteRequest("",parms, false);
         Gson gson = new GsonBuilder().create();
         return gson.fromJson(result, Token.class);
     }
 
 
-
+    protected void RefreshToken(Token existingToken) {
+        throw new UnsupportedOperationException("Not Supported");
+    }
     public String BuildAccessTokenUrlParameters(String username, String pw) {
         String result = BuildParm(R.string.grant_type_ident,R.string.grant_type,false);
         result += BuildParm(R.string.client_id_ident,R.string.client_id,true);
