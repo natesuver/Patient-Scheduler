@@ -50,7 +50,7 @@ public class Identity extends BaseApi {
         return result;
     }
     public String BuildRefreshTokenUrlParameters(String refreshToken) {
-        String result = BuildParm(R.string.grant_type_ident,R.string.grant_type,false);
+        String result = BuildParm(R.string.grant_type_ident,R.string.grant_type_refresh,false);
         result += BuildParm(R.string.client_id_ident,R.string.client_id,true);
         result += BuildParm(R.string.client_secret_ident,R.string.client_secret,true);
         result += BuildParm(R.string.scope_ident,R.string.scope,true);

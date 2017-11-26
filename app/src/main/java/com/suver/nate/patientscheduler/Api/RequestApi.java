@@ -18,7 +18,7 @@ public abstract class RequestApi extends BaseApi {
     protected void RefreshToken(Token existingToken) {
         Identity i = new Identity(mContext,"");
         Token refresh = i.GetRefreshToken(existingToken);
-        refresh.incrementRetries();
+        existingToken.incrementRetries();
         existingToken.setAccessToken(refresh.getAccessToken());
         existingToken.setRefreshToken(refresh.getRefreshToken());
     }

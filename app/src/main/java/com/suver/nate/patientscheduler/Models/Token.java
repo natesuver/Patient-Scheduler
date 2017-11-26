@@ -9,7 +9,7 @@ public class Token {
     private String refresh_token;
     private String token_type;
     private String error_description;
-    private Integer retries;
+    private Integer retries=0;
     public String getAccessToken() {
         return access_token;
     }
@@ -54,4 +54,5 @@ public class Token {
     public void resetRetries() {
         this.retries=0;
     }
+
 }

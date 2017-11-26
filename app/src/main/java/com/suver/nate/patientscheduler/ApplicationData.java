@@ -25,5 +25,4 @@ public class ApplicationData {
     public static OfficeSettings officeSettings;
     public static Token token;
     public static TaskDescriptionLookup tasks;
-
 }

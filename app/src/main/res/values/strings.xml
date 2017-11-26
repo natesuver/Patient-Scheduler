@@ -9,6 +9,7 @@
     <string name="acr_values_ident">acr_values</string>
     <string name="refresh_token_ident">refresh_token</string>
     <string name="grant_type">password</string>
+    <string name="grant_type_refresh">refresh_token</string>
     <string name="client_id">integrationTestClient</string>
     <string name="client_secret">secret</string>
     <string name="scope">openid profile roles soneto_data soneto_web soneto_dataconfig offline_access</string>

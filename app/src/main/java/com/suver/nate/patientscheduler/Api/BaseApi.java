@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.suver.nate.patientscheduler.ApplicationData;
 import com.suver.nate.patientscheduler.Models.Token;
 import com.suver.nate.patientscheduler.R;
 
@@ -92,10 +93,13 @@ public abstract class BaseApi {
                     break;
                 case 401: //Unauthorized.  Assume the access token is bad, and needs to be refreshed
                     RefreshToken(mToken);
-                    if (mToken.getRetries() <4)
+                    if (mToken.getRetries() <4) {
                         return ExecuteRequest(partialUrl);
-                    else
-                        stream = connection.getErrorStream(); //TODO: multiple attempts at authentication fail to work here.  Inform the user and shut down the application?
+                    }
+                    else {
+                        stream = connection.getErrorStream(); //TODO: multiple attempts at authentication fail.  Inform the user and shut down the application? Right now it just crashes
+                        Log.e(LOG,"Authentication Failure: " + GetResponseStringBuffer(stream).toString());
+                    }
                     break;
                 default: // everything else, for this purpose, is not a success.
                     stream = connection.getErrorStream();
