@@ -46,22 +46,24 @@
         android:stretchColumns="0,1"
         >
         <TableRow>
-            <TextView
-                android:id="@+id/office"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="12sp"
-                android:textAlignment="textStart"
-                android:text=""
-                />
-
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="125dp"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="left"
                 android:src="@drawable/nurse"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitStart"/>
+            <TextView
+                android:id="@+id/office"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textAlignment="textStart"
+                android:layout_marginLeft="20dp"
+                />
+
+
         </TableRow>
     </TableLayout>
 

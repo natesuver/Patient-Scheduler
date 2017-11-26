@@ -37,11 +37,6 @@ public class InvoiceFragment extends Fragment {
     private static final String LOG = "InvoiceFragment";
     private static final String list_key = "InvoiceListData";
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
     private OnFragmentInteractionListener mListener;
     private RecyclerView mInvoiceList;
     private InvoiceListItem[] mLastResult;
@@ -138,22 +133,10 @@ public class InvoiceFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            verifyStoragePermissions(getActivity());
             new DownloadInvoice(getActivity()).execute(mInvoiceData.getId());
         }
     }
 
-    //todo: move this to a place that is not as disruptive.  if they've already clicked, and they get this popup, it's already too late to ask for permissions.
-    private void verifyStoragePermissions(Activity activity) {
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
-    }
     private class InvoiceAdapter extends RecyclerView.Adapter<InvoiceFragment.InvoiceHolder> {
         private InvoiceListItem[] mInvoices;
         public InvoiceAdapter(InvoiceListItem[] Invoices) {

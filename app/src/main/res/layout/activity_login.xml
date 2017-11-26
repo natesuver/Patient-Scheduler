@@ -50,7 +50,6 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="mchristmas"
                     android:layout_marginLeft="10dp"
                     />
             </TableRow>
@@ -68,7 +67,6 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPassword"
-                    android:text="Android1!"
                     android:layout_marginLeft="10dp"/>
             </TableRow>
             <TableRow>
@@ -85,7 +83,6 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="SonetoQA"
                     android:layout_marginLeft="10dp" />
             </TableRow>
         </TableLayout>

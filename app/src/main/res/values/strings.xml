@@ -30,8 +30,8 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="office_welcome">Welcome To </string>
-    <string name="care_message">Your Care is our primary concern</string>
-    <string name="questions_concerns">If you have any questions about your care, or have an issue with a scheduled appointment, please click the icon in the lower right hand corner to call our office.\n\n<i>Swipe to the right to view your upcoming appointments</i>"</string>
+    <string name="care_message">Your care is our primary concern</string>
+    <string name="questions_concerns">If you have any questions about your care, or have an issue with a scheduled appointment, please click the icon in the lower right hand corner to call our office.\n\n<i><b>Swipe to the right to view your upcoming appointments</b></i>"</string>
     <string name="my_schedules">My Appointments</string>
     <string name="my_service_plan">My Service Plan</string>
     <string name="my_invoices">My Invoices</string>

@@ -35,9 +35,11 @@ import com.suver.nate.patientscheduler.R;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     private static final String TokenDataKey = "TokenData";
-    private static final int REQUEST_PHONE = 1;
-    private static String[] PERMISSIONS_PHONE = {
-            Manifest.permission.CALL_PHONE
+    private static final int REQUEST = 1;
+    private static String[] PERMISSIONS = {
+            Manifest.permission.CALL_PHONE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     private String mTokenData;
     /**
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        verifyCallPermissions(MainActivity.this);
+        verifyPermissions(MainActivity.this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,17 +145,18 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         }
     }
 
-    private void verifyCallPermissions(Activity activity) {
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE);
-        if (permission != PackageManager.PERMISSION_GRANTED) {
+    //TODO: This is super happy path, and assumes the end user will always say yes.  Modify user experience and handle appropriately when they decline.
+    private void verifyPermissions(Activity activity) {
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED ||
+                ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED  ) {
             ActivityCompat.requestPermissions(
                     activity,
-                    PERMISSIONS_PHONE,
-                    REQUEST_PHONE
+                    PERMISSIONS,
+                    REQUEST
             );
         }
-    }
 
+    }
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
