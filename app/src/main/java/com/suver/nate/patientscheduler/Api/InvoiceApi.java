@@ -1,6 +1,5 @@
 package com.suver.nate.patientscheduler.Api;
 
-import android.Manifest;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
@@ -8,10 +7,8 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.suver.nate.patientscheduler.Models.InvoiceListItem;
-import com.suver.nate.patientscheduler.Models.ScheduleListItem;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by nates on 11/24/2017.
@@ -39,7 +36,7 @@ public class InvoiceApi extends RequestApi {
         try {
             file.createNewFile();
         } catch (Exception ex) {
-            Log.d(LOG,"File could not be created: " + ex.getMessage());
+            Log.d(LOG,"File could not be created: " + ex.getMessage()); //TODO: this will fail if end user did not provide permission, handle appropriately.
         }
 
         Log.d(LOG,"File Path: " + file.getAbsolutePath());

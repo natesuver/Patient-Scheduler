@@ -3,9 +3,8 @@ package com.suver.nate.patientscheduler.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import android.widget.ProgressBar;
 import com.suver.nate.patientscheduler.Api.DropdownListApi;
 import com.suver.nate.patientscheduler.Api.Identity;
 import com.suver.nate.patientscheduler.Api.OfficeSettingsApi;
-import com.suver.nate.patientscheduler.Api.ScheduleApi;
 import com.suver.nate.patientscheduler.Api.UserSettingsApi;
 import com.suver.nate.patientscheduler.ApplicationData;
 import com.suver.nate.patientscheduler.Helpers.TaskDescriptionLookup;
@@ -24,8 +22,6 @@ import com.suver.nate.patientscheduler.Models.Token;
 import com.suver.nate.patientscheduler.Models.UserSetting;
 import com.suver.nate.patientscheduler.R;
 import com.suver.nate.patientscheduler.Validation.LoginValidator;
-
-import org.json.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity {

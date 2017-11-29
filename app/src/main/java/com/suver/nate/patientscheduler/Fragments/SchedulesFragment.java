@@ -13,17 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.suver.nate.patientscheduler.Activities.ScheduleDetailActivity;
 import com.suver.nate.patientscheduler.Api.ScheduleApi;
 import com.suver.nate.patientscheduler.ApplicationData;
+import com.suver.nate.patientscheduler.Helpers.ScheduleSort;
 import com.suver.nate.patientscheduler.Interfaces.OnFragmentInteractionListener;
 import com.suver.nate.patientscheduler.Models.ScheduleListItem;
 import com.suver.nate.patientscheduler.R;
-import com.suver.nate.patientscheduler.Helpers.ScheduleSort;
-
-import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -83,12 +79,6 @@ public class SchedulesFragment extends Fragment {
         SchedulesFragment fragment = new SchedulesFragment();
         return fragment;
     }
-
-   // public void onButtonPressed(Uri uri) {
-   //    if (mListener != null) {
-    //        mListener.onFragmentInteraction(uri);
-    //    }
-   // }
 
     @Override
     public void onAttach(Context context) {

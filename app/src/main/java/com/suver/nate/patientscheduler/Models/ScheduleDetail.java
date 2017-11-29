@@ -1,7 +1,5 @@
 package com.suver.nate.patientscheduler.Models;
 
-import org.joda.time.DateTime;
-
 /**
  * Created by nates on 11/24/2017.
  */

@@ -4,9 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,33 +16,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.suver.nate.patientscheduler.Api.ImageApi;
-import com.suver.nate.patientscheduler.Api.OfficeSettingsApi;
 import com.suver.nate.patientscheduler.Api.ScheduleApi;
 import com.suver.nate.patientscheduler.ApplicationData;
-import com.suver.nate.patientscheduler.Fragments.SchedulesFragment;
-import com.suver.nate.patientscheduler.Helpers.ScheduleSort;
-import com.suver.nate.patientscheduler.Models.OfficeSettings;
 import com.suver.nate.patientscheduler.Models.ScheduleDetail;
 import com.suver.nate.patientscheduler.Models.ScheduleListItem;
 import com.suver.nate.patientscheduler.Models.Task;
 import com.suver.nate.patientscheduler.R;
-
-import org.json.JSONObject;
-
-import java.util.Arrays;
 
 public class ScheduleDetailActivity extends AppCompatActivity {
     private static final String ScheduleLI = "ScheduleListItem";
     private ScheduleListItem mScheduleListItem;
     private ScheduleDetail mScheduleDetail;
     private Task[] mTaskData;
-
-    //cgName
-    //appt
-    //cert
 
     private ImageView mImg;
     private TextView mName;

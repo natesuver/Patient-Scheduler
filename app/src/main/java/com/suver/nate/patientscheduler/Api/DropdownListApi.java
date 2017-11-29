@@ -2,10 +2,7 @@ package com.suver.nate.patientscheduler.Api;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.suver.nate.patientscheduler.Helpers.TaskDescriptionLookup;
-import com.suver.nate.patientscheduler.Models.OfficeSettings;
 
 /**
  * Created by nates on 11/24/2017.

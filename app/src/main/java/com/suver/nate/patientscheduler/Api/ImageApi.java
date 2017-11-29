@@ -3,10 +3,6 @@ package com.suver.nate.patientscheduler.Api;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.suver.nate.patientscheduler.Models.ScheduleDetail;
-
 /**
  * Created by nates on 11/24/2017.
  */

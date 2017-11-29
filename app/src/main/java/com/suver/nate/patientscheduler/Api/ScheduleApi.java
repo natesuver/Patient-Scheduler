@@ -4,11 +4,9 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.suver.nate.patientscheduler.ApplicationData;
 import com.suver.nate.patientscheduler.Models.ScheduleDetail;
 import com.suver.nate.patientscheduler.Models.ScheduleListItem;
 import com.suver.nate.patientscheduler.Models.Task;
-import com.suver.nate.patientscheduler.R;
 
 /**
  * Created by nates on 11/23/2017.

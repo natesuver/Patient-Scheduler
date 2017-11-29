@@ -1,10 +1,13 @@
 package com.suver.nate.patientscheduler.Api;
+
 import android.content.Context;
 import android.util.Log;
 
 import com.suver.nate.patientscheduler.Models.ServicePlanListItem;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -20,7 +23,7 @@ public class ServicePlanApi extends RequestApi {
     public ServicePlanListItem[] GetList(Integer clientId) {
         String result = ExecuteRequest("my/clients/" + clientId + "/service-plan");
         ArrayList<ServicePlanListItem> splans= new ArrayList<ServicePlanListItem>();
-        try {
+        try { //transform the api result into something we can consume
             JSONArray arr = new JSONObject(result).getJSONArray("items");
 
             for (Integer i = 0; i< arr.length();i++) {
@@ -32,6 +35,6 @@ public class ServicePlanApi extends RequestApi {
         catch (Exception ex) {
             Log.d(LOG,result.toString());
         }
-        return splans.toArray (new ServicePlanListItem[0]);//ServicePlanListItem[])splans.toArray();
+        return splans.toArray (new ServicePlanListItem[0]);
     }
 }

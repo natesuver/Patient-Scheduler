@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.suver.nate.patientscheduler.ApplicationData;
 import com.suver.nate.patientscheduler.Models.Token;
 import com.suver.nate.patientscheduler.R;
 
